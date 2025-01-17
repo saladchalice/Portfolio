@@ -3,4 +3,69 @@ body {
          and use the OS’s UI font as the website font
        */
     font: 100%/1.5 system-ui;
+    /*set max width that can scale when shrunk*/
+    display:block;
+    max-width: 100ch;
+    margin-inline: max(1em, (100% - 100ch) / 2);;
+  }
+
+img.frontpage-image {
+    width: fit-content;
+    max-width: 100%;
+  }
+
+  /* style navigation */
+  ul{
+    display:contents;
+  }
+
+  ul li{
+    display:contents;
+  }
+
+  nav{
+    display:flex;
+    margin-bottom: 15;
+
+  }
+
+  nav a{
+    flex:1;
+    text-decoration: none;
+    color: inherit;
+    text-align:center;
+    padding:0.5em;
+    border-bottom-width:1px;
+    border-bottom-style:solid;
+    border-bottom-color:oklch(80% 3% 200);
+  }
+
+  .current{
+    font-weight:bold;
+    padding:0.5em;
+    border-bottom-width:.4em;
+    border-bottom-color:oklch(80% 3% 200 / .7);
+
+  }
+
+  html{
+    --color-accent: oklch(70% 0.1 120);
+    accent-color: var(--color-accent);
+  }
+
+  a:hover{
+    padding:0.5em;
+    border-bottom-width:.4em;
+    border-bottom-color: var(--color-accent);
+    background-color: oklch(from var(--color-accent) 95% 5% h)
+  }
+
+
+
+  input{
+    font:inherit;
+  }
+
+  textarea{
+    font:inherit;
   }

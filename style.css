@@ -26,7 +26,6 @@ img.frontpage-image {
   nav{
     display:flex;
     margin-bottom: 15;
-
   }
 
   nav a{
@@ -60,7 +59,26 @@ img.frontpage-image {
     background-color: oklch(from var(--color-accent) 95% 5% h)
   }
 
+  form{
+    display:grid;
+    grid-template-columns: auto 1fr;
+  }
 
+  form label{
+    display:grid;
+    grid-template-columns: subgrid;
+    grid-column:1/-1;
+    gap:1em;
+  }
+
+  form button{
+    display:grid;
+    grid-template-columns: subgrid;
+    gap:1em;
+    grid-column:1/-1;
+    justify-content: center;
+
+  }
 
   input{
     font:inherit;
@@ -69,3 +87,83 @@ img.frontpage-image {
   textarea{
     font:inherit;
   }
+
+  .projects{
+    display:grid;
+    grid-template-columns: repeat(auto-fill, minmax(15em, 1fr));
+    gap:1em;
+  }
+
+  .projects article{
+    display:grid;
+    grid-template-rows: subgrid;
+    grid-row: span 3;
+    gap: 2em;
+
+  }
+
+  .project article h2{
+    margin: 0;
+  }
+
+  h1{
+    font-size: 4em; 
+  }
+
+  h1, h2, h3, h4, h5{
+    line-height: 1.1;
+    text-wrap:balance;
+  }
+
+  .resumebody h2{
+    color:crimson;
+    text-align: center;
+    margin-bottom: .1em;
+  }
+
+  .resumebody section{
+    margin-bottom:4em;
+  }
+  
+  .resumedetail p{
+    text-align: center;
+    padding-bottom:0.5em;
+    padding-left:2em;
+    border-bottom-width:1px;
+    border-bottom-style:solid;
+    border-bottom-color:oklch(80% 3% 200);
+  }
+
+
+  .resumebody h4{
+    margin-block-end:.2em;
+  }
+
+  .resumebody h5{
+    color:darkgray;
+    font-weight: normal;
+    margin:.2em;
+  }
+
+  .resumebody p{
+    display:flex;
+  }
+
+  .resumebody .pro p{
+    padding-left:.2em;
+  }
+
+  .resumebody ul{
+    display:block;
+    list-style-type: disc;
+  }
+
+  .resumebody li{
+    display:block;
+  }
+
+
+
+
+  
+

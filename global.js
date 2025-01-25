@@ -39,7 +39,7 @@ document.body.prepend(nav);
 for (let p of pages){
   let url = p.url;
   let title = p.title;
-  url = !ARE_WE_HOME && !url.startsWith('http') ? '../Portfolio' + url : url;
+  url = !ARE_WE_HOME && !url.startsWith('http') ? '/Portfolio/' + url : url;
 
   let a = document.createElement('a');
   a.href = url;

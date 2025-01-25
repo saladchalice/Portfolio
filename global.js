@@ -18,9 +18,9 @@ function $$(selector, context = document) {
 
 let pages = [
   { url: '', title: 'Home' },
-  { url: 'Portfolio/projects/', title: 'Projects' },
-  { url: 'Portfolio/resume/', title: 'Resume' },
-  { url: 'Portfolio/contact/', title: 'Contact' },
+  { url: 'projects/', title: 'Projects' },
+  { url: 'resume/', title: 'Resume' },
+  { url: 'contact/', title: 'Contact' },
   { url: 'https://github.com/saladchalice/shrkshkk', title: 'Github' }
 ];
 
@@ -39,7 +39,7 @@ document.body.prepend(nav);
 for (let p of pages){
   let url = p.url;
   let title = p.title;
-  url = !ARE_WE_HOME && !url.startsWith('http') ? '../' + url : url;
+  url = !ARE_WE_HOME && !url.startsWith('http') ? '../Portfolio' + url : url;
 
   let a = document.createElement('a');
   a.href = url;

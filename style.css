@@ -26,6 +26,9 @@ img.frontpage-image {
   nav{
     display:flex;
     margin-bottom: 15;
+    --border-color: oklch(50% 10% 200 / 40%);
+    
+
   }
 
   nav a{
@@ -36,27 +39,29 @@ img.frontpage-image {
     padding:0.5em;
     border-bottom-width:1px;
     border-bottom-style:solid;
-    border-bottom-color:oklch(80% 3% 200);
+    border-bottom-color: var(--border-color);
   }
 
   .current{
     font-weight:bold;
     padding:0.5em;
     border-bottom-width:.4em;
-    border-bottom-color:oklch(80% 3% 200 / .7);
+    border-bottom-color: var(--border-color);
 
   }
 
   html{
     --color-accent: oklch(70% 0.1 120);
     accent-color: var(--color-accent);
+    color-scheme: dark;
+
   }
 
   a:hover{
     padding:0.5em;
     border-bottom-width:.4em;
     border-bottom-color: var(--color-accent);
-    background-color: oklch(from var(--color-accent) 95% 5% h)
+    background-color: color-mix(in oklch, var(--color-accent), canvas 85%);
   }
 
   form{
@@ -162,6 +167,22 @@ img.frontpage-image {
     display:block;
   }
 
+  .color-scheme {
+    position: absolute; 
+    top: 1rem;          
+    right: 1rem;        
+    font-size: 80%;   
+    font-family: inherit; 
+  }
+
+.color-scheme option{
+  font-family: inherit;
+}
+
+
+.color-scheme option textarea{
+  font-family: inherit;
+}
 
 
 

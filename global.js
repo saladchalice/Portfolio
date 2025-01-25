@@ -35,6 +35,7 @@ let nav = document.createElement('nav')
 document.body.prepend(nav);
 // edit url
 //iterate over pages and add <a> elements for all links
+
 for (let p of pages){
   let url = p.url;
   let title = p.title;

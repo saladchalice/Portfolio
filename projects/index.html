@@ -7,6 +7,21 @@
     <script type = "module" src="../global.js"></script>
 
     <title>Document</title>
+    <script>
+        console.log("hostname: ", window.location.hostname);
+        // Set base URL dynamically based on hostname
+        if (
+            window.location.hostname === "127.0.0.1" ||
+            window.location.hostname === "localhost"
+        ) {
+            document.write('<base href="/">'); // Development environment
+        } else {
+            document.write('<base href="/portfolio/">'); // Production environment
+        }
+    
+        const baseElement = document.querySelector("base");
+        console.log("Base URL:", baseElement.href);
+    </script>
 </head>
 <body>
 

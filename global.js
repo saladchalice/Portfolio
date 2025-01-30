@@ -29,7 +29,7 @@ let pages = [
 const ARE_WE_HOME = document.documentElement.classList.contains('home');
 
 // Determine the base URL for GitHub Pages
-const BASE_URL = window.location.pathname.includes('/dsc-106-portfolio/') ? '/dsc-106-portfolio/' : '/';
+const BASE_URL = window.location.pathname.includes('/Portfolio/') ? '/Portfolio/' : '/';
 
 // create nav element and place at beginning of body
 let nav = document.createElement('nav')

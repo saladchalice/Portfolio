@@ -28,8 +28,8 @@ let pages = [
 // const is like let but it's immutable
 const ARE_WE_HOME = document.documentElement.classList.contains('home');
 
-// Determine the base URL for GitHub Pages
-const BASE_URL = '/Portfolio/';
+// Determine the base URL for GitHub Pages and local server
+const BASE_URL = window.location.hostname === '127.0.0.1' ? '/' : '/Portfolio/';
 
 // create nav element and place at beginning of body
 let nav = document.createElement('nav')
@@ -149,8 +149,11 @@ export function renderProjects(projects, containerElement, headingLevel = 'h2') 
     
     article.innerHTML = `
       <img src="${image}" alt="${title}" style="width: 100%; max-width: 100%; height: auto;">
-      <h4>${year}</h4>
-      <p>${description}</p>`;
+      <div>
+        <p>${description}</p>
+        <h4>c. ${year}</h4>
+      </div>`
+      ;
     
     article.prepend(heading);
     containerElement.appendChild(article);

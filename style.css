@@ -321,4 +321,83 @@ path {
     margin-right: 0.5em; /* Ensure consistent margin */
   }
 }
+#stats {
+  display: flex;
+  max-width: fit-content;
+}
 
+#stats dl {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Four equal-sized columns */
+}
+
+#stats dt {
+  grid-row: 1; /* Place all dt elements in the first row */
+  text-align: center;
+  margin-bottom: 0.5rem; /* Adjust spacing between title and figure */
+  font-size: larger;
+  font-weight: 300;
+  color: cadetblue;
+  padding-right: 1em;
+}
+
+#stats dd {
+  grid-row: 2; /* Place all dd elements in the second row */
+  text-align: center;
+  margin: 0.3rem;
+  font-size: x-large;
+  font-weight: 600;
+}
+
+.gridlines line {
+  stroke-width: 1;
+  opacity: 0.2; /* Make the gridlines fainter */
+}
+
+.gridline-night {
+  stroke: blue;
+}
+
+.gridline-day {
+  stroke: orange;
+}
+
+dl.info {
+  display: grid;
+  grid-template-columns: auto 1fr; /* dt in the first column, dd in the second */
+  gap: 0.5em; /* Adjust gap between columns as needed */
+}
+
+dl.info dt {
+  grid-column: 1; /* Place dt elements in the first column */
+  margin: 0; /* Remove default margins */
+  font-weight: 300; /* Make labels less prominent */
+  color: gray; /* Adjust color to make labels less prominent */
+}
+
+dl.info dd {
+  grid-column: 2; /* Place dd elements in the second column */
+  margin: 0; /* Remove default margins */
+  font-weight: 600; /* Make values more prominent */
+  color: black; /* Adjust color to make values more prominent */
+}
+
+.tooltip {
+  position: fixed;
+  top: 1em;
+  left: 1em;
+  color: white; /* White text color */
+  padding: 0.5em; /* Padding around the tooltip */
+  border-radius: 0.5em; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Drop shadow */
+  z-index: 1000; /* Ensure it is above other elements */
+}
+circle {
+  transition: 200ms;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+circle:hover {
+  transform: scale(2);
+}

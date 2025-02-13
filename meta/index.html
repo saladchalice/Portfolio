@@ -7,13 +7,26 @@
     <link rel="stylesheet" href="../style.css">
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="main.js" defer></script> <!-- Include the main.js script -->
+    <script src="../global.js" type="module"></script>
 
     <title>Portfolio</title>
 </head>
 <body>
-    <h1>Welcome to My Portfolio</h1>
-    <p>This is a basic HTML page.</p>
     <div id="stats"></div>
+    
+    <h2>Commits by time of day</h2>
+    <dl id="commit-tooltip" class="info tooltip">
+        <dt>Commit</dt>
+        <dd>
+          <a href="" id="commit-link" target="_blank"></a>
+        </dd>
+      
+        <dt>Date</dt>
+        <dd id="commit-date"></dd>
+      
+        <!-- Add: Time, author, lines edited -->
+      </dl> 
+    <div id="chart"></div>
 
 </body>
 </html>

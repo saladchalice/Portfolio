@@ -366,6 +366,8 @@ dl.info {
   display: grid;
   grid-template-columns: auto 1fr; /* dt in the first column, dd in the second */
   gap: 0.5em; /* Adjust gap between columns as needed */
+  transition-duration: 500ms;
+  transition-property: opacity, visibility;
 }
 
 dl.info dt {
@@ -382,6 +384,11 @@ dl.info dd {
   color: black; /* Adjust color to make values more prominent */
 }
 
+dl.info[hidden]:not(:hover, :focus-within) {
+  opacity: 0;
+  visibility: hidden;
+}
+
 .tooltip {
   position: fixed;
   top: 1em;
@@ -392,6 +399,7 @@ dl.info dd {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Drop shadow */
   z-index: 1000; /* Ensure it is above other elements */
 }
+
 circle {
   transition: 200ms;
   transform-origin: center;
@@ -399,5 +407,44 @@ circle {
 }
 
 circle:hover {
-  transform: scale(2);
+  transform: scale(1.2);
+}
+
+
+@keyframes marching-ants {
+  to {
+    stroke-dashoffset: -8; /* 5 + 3 */
+  }
+}
+
+.selection {
+  fill-opacity: 0.1;
+  stroke: black;
+  stroke-opacity: 0.7;
+  stroke-dasharray: 5 3;
+  animation: marching-ants 2s linear infinite;
+}
+
+circle.selected {
+  fill: #ff6b6b;
+}
+
+#language-breakdown {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  max-width: fit-content;
+}
+
+#language-breakdown dt {
+  font-weight: bold;
+}
+
+#language-breakdown dd {
+  margin: 0;
+  font-size: 1rem;
+  color: #333;
 }

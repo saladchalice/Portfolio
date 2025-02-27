@@ -1,78 +1,90 @@
 [
     {
-        "title": "Power Outages: Predicting Severity and Evaluating Causes",
-        "image": "../images/power.png",
+        "title": "PedalPlot: What's Bike Traffic Like in Boston?",
+        "image": "/images/biking.png",
+        "year": "2025",
+        "description": "This project uses publicly accessible GeoJsons to interactively map arrivals, departures, and total traffic across all times of day for all bike stations in Boston.",
+        "link": "https://saladchalice.github.io/pedalplot/",
+        "tags": ["Data Visualization", "D3.js", "HTML/CSS"]
+    },
+    {
+        "title": "Aging Under the Knife: How Surgery Trends Shift Across Generations",
+        "image": "/images/aging.png",
+        "year": "2025",
+        "description": "This project visualizes the trends in surgical procedures across different generations with a focus on user interactability. The data was sourced from VitalDB, and the visualization was created using D3.js and HTML/CSS.",
+        "link": "https://ancientabacus.github.io/106-Project-3/",
+        "tags": ["Data Visualization", "D3.js", "HTML/CSS"]
+    },
+    {
+        "title": "Northrop Grumman AI Governance: Data Pipelines",
+        "image": "/images/ng.png",
         "year": "2024",
-        "description": "This project centers around the dataset “Data on major power outage events in the continental U.S.” compiled by Mukherjee et al., 2018 in order to identify and understand the most impactful characteristics that are associated with power outage severity and use them to predict future severity."
+        "description": "Developed a data pipeline to automate the ingestion, cleaning, and transformation of data from various AI services (chatbots and a governance tool) to a centralized data warehouse. The pipeline was built using Python and SQL and was deployed on AWS EC2 instances.",
+        "tags": ["Data Pipeline", "Python", "SQL", "AWS"]
+    },
+    {
+        "title": "Power Outages: Predicting Severity and Evaluating Causes",
+        "image": "/images/power.png",
+        "year": "2024",
+        "description": "This project seeks to identify and understand the most impactful characteristics that are associated with power outage severity and use them to predict future severity.",
+        "link": "https://saladchalice.github.io/Power-Outages-Predicting-Severity-and-Evaluating-Causes/",
+        "tags": ["Predictive Modeling", "Python", "Data Analysis", "Data Visualization"]
     },
     {
         "title": "Developing Environmentally-Aware Algorithms to Recommend Virtual Machine Migration",
-        "image": "../images/azure.png",
+        "image": "/images/azure.png",
         "year": "2021",
-        "description": "This project develops two forecasting techniques that consider emissions patterns to recommend to cloud computing users optimal times to migrate cloud resources. Algorithms were trained on cloud computing center data provided by Microsoft Azure as well as historic emissions from WattimeAPI."
+        "description": "This project develops two forecasting techniques that consider emissions patterns to recommend to cloud computing users optimal times to migrate cloud resources. Algorithms were trained on cloud computing center data provided by Microsoft Azure as well as historic emissions from WattimeAPI.",
+        "tags": ["Forecasting", "Azure", "Python", "Data Analysis"]
     },
     {
         "title": "Impacts of Urban Walkability and Wage on Car Ownership in California",
-        "image": "../images/walk.png",
+        "image": "/images/walk.png",
         "year": "2024",
-        "description": "Utilized U.S EPA's Smart Location Dataset to analyze Californian areas' relationships between the EPA-rated Walkability (an aggregate index for traffic, access to public transit, and accessibility of labor), wage, and car ownership, modeling it with regression."
+        "description": "Utilized U.S EPA's Smart Location Dataset to analyze Californian areas' relationships between the EPA-rated Walkability (an aggregate index for traffic, access to public transit, and accessibility of labor), wage, and car ownership, modeling it with regression.",
+        "tags": ["Regression Analysis", "Python", "Data Analysis", "Data Visualization"]
     },
     {
         "title": "Structural Topic Analysis of Race-Related Discourse in South African SOTN Speeches",
-        "image": "../images/zaf.png",
+        "image": "/images/zaf.png",
         "year": "2023",
-        "description": "Utilized structural topic modeling techniques in RStudio to evaluate trends in topical frequency and significance across all State of the Nation addresses since 1994. Analyzed and tracked topics heavily interlinked with racial discourse and post-apartheid reform to discover their"
+        "description": "Utilized structural topic modeling techniques in RStudio to evaluate trends in topical frequency and significance across all State of the Nation addresses since 1994. Analyzed and tracked topics heavily interlinked with racial discourse and post-apartheid reform to discover their", 
+        "tags": ["Topic Modeling", "RStudio", "Data Analysis"]
     },
     {
         "title": "General Store Co-Op Financial Performance and Forecasting",
-        "image": "../images/gstore.png",
+        "image": "/images/gstore.png",
         "year": "2024",
-        "description": "Compiled sales data of my workplace over the past 16 months in Python pandas, cleaned the data to arrange it into tidy format, and generated summary statistics and visualizations to showcase demand trends and possible expansions. Also trained an ARIMA model for demand forecasting."
+        "description": "Compiled sales data of my workplace over the past 16 months in Python pandas, cleaned the data to arrange it into tidy format, and generated summary statistics and visualizations to showcase demand trends and possible expansions. Also trained an ARIMA model for demand forecasting.",
+        "tags": ["Time Series Analysis", "Python", "Data Analysis", "Data Visualization"]
+    },
+    {
+        "title": "Oaxaca-Blinder Decom: Poverty-Income Ratio Disparities Between Black and White Americas",
+        "image": "/images/decomp.png",
+        "year": "2025",
+        "description": "Utilized the Oaxaca-Blinder decomposition technique to evaluate the root causes of disparity in poverty-income ratios between Black and White Americans, utilizing data from the U.S. Census Bureau and the Bureau of Labor Statistics.",
+        "tags": ["Data Analysis", "Econometrics", "RStudio"]
     },
     {
         "title": "RStudio Brexit Analysis: Demographic and Economic Differences in Pro-Brexit Councils",
-        "image": "../images/uk.png",
+        "image": "/images/uk.png",
         "year": "2022",
-        "description": "Utilized RStudio to intake demographic data on English councils to attempt to evaluate factors that are correlated with voting Leave, including unemployment statistics, import-shock susceptibility, immigrant population, and population share above the age of 60, among others."
+        "description": "Utilized RStudio to intake demographic data on English councils to attempt to evaluate factors that are correlated with voting Leave, including unemployment statistics, import-shock susceptibility, immigrant population, and population share above the age of 60, among others.",
+        "tags": ["Data Analysis", "RStudio", "Data Visualization"]
     },
     {
         "title": "XGBoost Credit Card Fraud Classifier",
-        "image": "../images/money.png",
+        "image": "/images/money.png",
         "year": "2024",
-        "description": "Implements and trains an XGBoost machine learning algorithm in Python with the XGBoost package to classify financial transaction data as fraudulent or legitimate based on factors such as transaction time, category, merchant, amount, etc."
+        "description": "Implements and trains an XGBoost machine learning algorithm in Python with the XGBoost package to classify financial transaction data as fraudulent or legitimate based on factors such as transaction time, category, merchant, amount, etc.",
+        "tags": ["Machine Learning", "Python", "Data Analysis"]
     },
     {
         "title": "K-Nearest Neighbors Image Classifier",
-        "image": "../images/knn.png",
+        "image": "/images/knn.png",
         "year": "2020",
-        "description": "Implemented an RGB image processing class in Python that reads in images and offers customization options as well as a KNN component to analyze image similarity and assign unlabeled images labels according to the labels of its nearest neighbors."
-    },
-    {
-        "title": "Ea rem dolore odio.",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "year": "2024",
-
-        "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam dolor quos, quod assumenda explicabo odio, "
-    },
-    {
-        "title": "Adipisci dolore laborum natus.",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "year": "2025",
-
-        "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam dolor quos, quod assumenda explicabo odio, "
-    },
-    {
-        "title": "Rerum, eaque omnis! Culpa.",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "year": "2019",
-
-        "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam dolor quos, quod assumenda explicabo odio, "
-    },
-    {
-        "title": "Dolorum amet modi eum!",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "year": "2018",
-
-        "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam dolor quos, quod assumenda explicabo odio, "
+        "description": "Implemented an RGB image processing class in Python that reads in images and offers customization options as well as a KNN component to analyze image similarity and assign unlabeled images labels according to the labels of its nearest neighbors.",
+        "tags": ["Image Processing", "Python", "Data Analysis"]
     }
+    
 ]

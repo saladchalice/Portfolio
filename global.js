@@ -142,17 +142,31 @@ export function renderProjects(projects, containerElement, headingLevel = 'h2') 
     const image = project.image || 'default-image.png';
     const description = project.description || 'No description available.';
     const style = project.style || '';
+    const link = project.link || '#'; // Default link if not provided
     const year = project.year || 'Year unknown';
+    const tags = project.tags || []; // Default to empty array if no tags
+
     
     // Create heading element dynamically based on headingLevel
     const heading = document.createElement(headingLevel);
     heading.textContent = title;
+    // Create tags container
+    const tagsContainer = document.createElement('div');
+    tagsContainer.classList.add('tags-container');
+    tags.forEach(tag => {
+      const tagSpan = document.createElement('span');
+      tagSpan.classList.add('tag');
+      tagSpan.textContent = tag;
+      tagsContainer.appendChild(tagSpan);
+    });
     
     article.innerHTML = `
-      <img src="${image}" alt="${title}" style="width: 100%; max-width: 100%; height: auto;">
+      <img src="${image}" alt="${title}" style="width: 80%; height: 100%; object-fit: cover;">
       <div>
         <p>${description}</p>
         <h4>c. ${year}</h4>
+        <a href="${link}" target="_blank" rel="noopener noreferrer" class="project-link">View Project</a>
+
       </div>`
       ;
     

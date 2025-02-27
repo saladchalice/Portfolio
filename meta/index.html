@@ -13,6 +13,19 @@
 </head>
 <body>
     <div id="stats"></div>
+
+    <h1>
+      <header class="right-header">
+        <label>
+            Show commits until:
+            <input id='progress-slider' type="range" min="0" max="100" value="0" style="width: 650px;">
+            <time id="any-progress">No Selection</time>
+            <time id="selected-progress"></time>
+        </label>
+      </header>
+    </h1>
+    
+
     
     <h2>Commits by time of day</h2>
     <dl id="commit-tooltip" class="info tooltip">

@@ -99,12 +99,24 @@ img.frontpage-image {
     gap:1em;
   }
 
+  .projects img{
+    width:200px;
+  }
+
   .projects article{
     display:grid;
     grid-template-rows: subgrid;
-    grid-row: span 3;
-
+    grid-row: span 3;    
+    border-radius: 10px;
+    padding: 1em;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Drop shadow */
   }
+
+  .projects article:hover {
+    outline: 2px solid black; /* Adds a black outline */
+    outline-offset: -2px; /* Ensures the outline is inside the element */
+    cursor: pointer;
+}
 
   .projects article h4 {
     margin: 0.0001em 0;
@@ -254,6 +266,8 @@ h2{
   margin-right: 2em;
 }
 
+
+
 .legend-item-selected{
   display: flex;
   align-items: center;
@@ -389,6 +403,20 @@ dl.info[hidden]:not(:hover, :focus-within) {
   visibility: hidden;
 }
 
+.tags-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px; /* Add space between tags */
+  margin-top: 10px; /* Ensure tags are spaced from other content */
+}
+
+.tag {
+  background-color: #f0f0f0; /* Example background for tags */
+  padding: 5px 10px; /* Padding inside tags */
+  border-radius: 3px;
+  font-size: 14px;
+}
+
 .tooltip {
   position: fixed;
   top: 1em;
@@ -447,4 +475,49 @@ circle.selected {
   margin: 0;
   font-size: 1rem;
   color: #333;
+}
+
+header {
+  display: flex;
+  gap: 1em;
+  align-items: baseline;
+}
+
+h1 {
+  width: 100%;
+  display: flex;
+  justify-content: space-between; /* Ensures space between headers */
+  margin-bottom: 0;
+
+}
+
+label {
+  font: system-ui sans-serif;
+  font-weight: 500;
+  margin-bottom: 0.1em;
+  font-size:.3em;
+}
+
+time {
+  color: black;
+  font-weight: 300;
+  text-align: right;
+  display: block;
+  font-size: 1em;
+}
+
+em {
+  color: darkgrey;
+  font-weight: 200;
+  text-align: right;
+  display: block;
+  font-size: 0.7em;
+}
+
+#any-progress{
+  font-size:.8em;
+}
+
+#selected-progress{
+  font-size:.9em;
 }

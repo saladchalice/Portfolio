@@ -2,9 +2,10 @@ let data = [];
 let commits = [];
 let xScale, yScale;
 
+
 async function loadData() {
     data = await d3.csv('loc.csv', (row) => ({
-      ...row,
+      ...row, 
       line: Number(row.line), // or just +row.line
       depth: Number(row.depth),
       length: Number(row.length),
@@ -16,6 +17,41 @@ async function loadData() {
     // console.log(commits);
     displayStats();
     createScatterplot();
+
+    //slider functionality ---------------------------------------------------------
+    // select elements
+
+    let commitProgress = 100;
+    let timeScale = d3.scaleTime([d3.min(commits, d => d.datetime), d3.max(commits, d => d.datetime)], [0, 100]);
+    let commitMaxTime = timeScale.invert(commitProgress);
+
+    const progressSlider = document.getElementById('progress-slider');
+    const selectedProgress = document.getElementById('selected-progress');
+    const anyTimeLabel = document.getElementById('any-progress');
+
+    function updateProgressDisplay() {
+        commitProgress = Number(progressSlider.value);  // Get slider value
+        commitMaxTime = timeScale.invert(commitProgress);
+
+        if (commitProgress === -1) {
+          selectedProgress.textContent = '';  // Clear time display
+          anyTimeLabel.textContent = timeScale[0];  // Clear time display
+          anyTimeLabel.style.display = 'block';  // Show "(any time)"
+        } else {
+          selectedProgress.textContent = new Date(commitMaxTime).toLocaleString(undefined, { 
+            dateStyle: "long", 
+            timeStyle: "short" 
+            });
+          anyTimeLabel.style.display = 'none';  // Hide "(any time)"
+        }
+
+    // Trigger filtering logic which will be implemented in the next step
+    let filteredCommits = commits.filter(commit => commit.datetime < commitMaxTime);
+    let filteredLines = data.filter(item => item.datetime < commitMaxTime);
+    }
+
+    progressSlider.addEventListener('input', updateProgressDisplay);
+
   }
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -295,3 +331,6 @@ function updateLanguageBreakdown() {
 
   return breakdown;
 }
+
+
+

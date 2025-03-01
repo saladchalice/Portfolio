@@ -49,35 +49,54 @@ async function loadData() {
 
         // Trigger filtering logic which will be implemented in the next step
         filteredCommits = commits.filter(d => new Date(d.datetime) < commitMaxTime);
-        console.log(filteredCommits);
+        // console.log(filteredCommits);
 
- 
+        // --------------- other
+        let lines = filteredCommits.flatMap((d) => d.lines);
+        let files = [];
+        files = d3
+          .groups(lines, (d) => d.file)
+          .map(([name, lines]) => {
+            return { name, lines };
+          });
+        files = d3.sort(files, (d) => -d.lines.length);
+        // console.log(lines);
+
+
+        d3.select('.files').selectAll('div').remove(); // don't forget to clear everything first so we can re-render
+        let filesContainer = d3.select('.files').selectAll('div').data(files).enter().append('div');
+        
+
+        filesContainer.append('dt')
+        .attr('id','files') // Add unique ID to <dt> based on index
+        .append('code')
+        .text(d => d.name)
+        .append('small')
+        .html(d => `${d.lines.length} lines`)
+        .style('display', 'block')
+        .style('font-size', 'smaller')
+        .style('opacity', 0.6);
+      
+        filesContainer.append('dd')
+          .attr('id', 'files') // Add unique ID to <dd> based on index
+          .selectAll('div')
+          .data(d => d.lines)  // Use 'lines' as the data source for each <div>
+          .enter()
+          .append('div')  // Append a <div> for each line
+          .attr('class', 'line')  // Set the class for styling
+
+
+
+        let fileTypeColors = d3.scaleOrdinal(d3.schemeTableau10);
+
+                
+  
         // updateCircles(filterTripsByTime());
         updateScatterplot(filteredCommits);
     }
     updateScatterplot(filteredCommits);
 
     progressSlider.addEventListener('input', updateProgressDisplay);
-
-    // --------------- other
-    let lines = filteredCommits.flatMap((d) => d.lines);
-    let files = [];
-    files = d3
-      .groups(lines, (d) => d.file)
-      .map(([name, lines]) => {
-        return { name, lines };
-      });
-
-
-    d3.select('.files').selectAll('div').remove(); // don't forget to clear everything first so we can re-render
-    let filesContainer = d3.select('.files').selectAll('div').data(files).enter().append('div');
-
-    filesContainer.append('dt')
-    .append('code')
-    .text(d => {
-      // Add filename before or after the code text as needed
-      return `${d.file}: ${d.codeSnippet}`; // Assuming you have `file` and `codeSnippet` as data fields
-    });    // filesContainer.append('dd').text(d => ...); // TODO
   }
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -121,37 +140,60 @@ function processCommits() {
     const dl = d3.select('#stats').append('dl').attr('class', 'stats');
   
     // Add total LOC
-    dl.append('dt').html('Total <abbr title="Lines of code">LOC</abbr>');
-    dl.append('dd').text(data.length);
+    dl.append('dt')
+      .html('TOTAL <abbr title="Lines of code">LOC</abbr>')
+      .attr('class', 'stats');
+    dl.append('dd')
+      .text(data.length)
+      .attr('class', 'stats');
   
     // Add total commits
-    dl.append('dt').text('Total commits');
-    dl.append('dd').text(commits.length);
+    dl.append('dt')
+      .text('TOTAL COMMITS')
+      .attr('class', 'stats');
+    dl.append('dd')
+      .text(commits.length)
+      .attr('class', 'stats');
   
     // Add more stats as needed...
     // Add maximum file length (in lines)
-    dl.append('dt').text('Maximum file length (in lines)');
-    dl.append('dd').text(d3.max(data, d => d.length));
-
+    dl.append('dt')
+      .text('MAX FILE SIZE')
+      .attr('class', 'stats');
+    dl.append('dd')
+      .text(d3.max(data, d => d.length))
+      .attr('class', 'stats');
+  
     // Add average depth
-    dl.append('dt').text('Average depth');
-    dl.append('dd').text(d3.mean(data, d => d.depth).toFixed(2))
-    
-    dl.append('dt').text('Total files');
-    dl.append('dd').text(d3.group(data, d => d.file).size);
-
+    dl.append('dt')
+      .text('AVERAGE DEPTH')
+      .attr('class', 'stats');
+    dl.append('dd')
+      .text(d3.mean(data, d => d.depth).toFixed(2))
+      .attr('class', 'stats');
+  
+    dl.append('dt')
+      .text('FILES')
+      .attr('class', 'stats');
+    dl.append('dd')
+      .text(d3.group(data, d => d.file).size)
+      .attr('class', 'stats');
+  
     const fileLengths = d3.rollups(
-        data,
-        (v) => d3.max(v, (v) => v.line),
-        (d) => d.file
-      );
+      data,
+      (v) => d3.max(v, (v) => v.line),
+      (d) => d.file
+    );
     const averageFileLength = d3.mean(fileLengths, (d) => d[1]);
-
-    dl.append('dt').text('Average file length');
-    dl.append('dd').text(averageFileLength.toFixed(2));
-
+  
+    dl.append('dt')
+      .text('AVERAGE FILE LENGTH')
+      .attr('class', 'stats');
+    dl.append('dd')
+      .text(averageFileLength.toFixed(2))
+      .attr('class', 'stats');
   }
-
+  
 
 
 // plotting --------------------------------------------------------

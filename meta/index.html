@@ -12,18 +12,10 @@
     <title>Portfolio</title>
 </head>
 <body class="meta-page">
-    <!-- <h1>
-      <header class="right-header">
-        <label>
-            Show commits until:
-            <input id='progress-slider' type="range" min="0" max="100" value="0" style="width: 650px;">
-            <time id="any-progress">No Selection</time>
-            <time id="selected-progress"></time>
-        </label>
-      </header>
-    </h1> -->
-    <dl class="files"></dl>
+    <!--stats-->
     <div id="stats"></div>
+
+    
 
     
     <h2>Commits by time of day</h2>
@@ -36,7 +28,6 @@
         <dt>Date</dt>
         <dd id="commit-date"></dd>
       
-        <!-- Add: Time, author, lines edited -->
       </dl> 
 
       <div id="scrollytelling">
@@ -47,9 +38,26 @@
         <!-- our old scatterplot div -->
         <div id="chart"></div>
     </div>
-
+    <!-- selection info-->
     <p id="selection-count">No commits selected</p>
     <dl id="language-breakdown" class="stats"></dl>
+
+
+    <!--scroll wheel-->
+    <h1>
+      <header class="right-header">
+        <label>
+            Show commits until:
+            <input id='progress-slider' type="range" min="0" max="100" value="0" style="width: 30em;">
+            <time id="any-progress">No Selection</time>
+            <time id="selected-progress"></time>
+        </label>
+      </header>
+    </h1>
+    <!-- unit visualization of lines-->
+    <dl class="files"></dl>
+
+
 
 </body>
 </html>

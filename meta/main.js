@@ -22,84 +22,84 @@ async function loadData() {
     //slider functionality ---------------------------------------------------------
     // select elements
 
-    // let commitProgress = 100;
-    // let timeScale = d3.scaleTime([d3.min(commits, d => d.datetime), d3.max(commits, d => d.datetime)], [0, 100]);
-    // let commitMaxTime = timeScale.invert(commitProgress);
+    let commitProgress = 100;
+    let timeScale = d3.scaleTime([d3.min(commits, d => d.datetime), d3.max(commits, d => d.datetime)], [0, 100]);
+    let commitMaxTime = timeScale.invert(commitProgress);
 
-    // const progressSlider = document.getElementById('progress-slider');
-    // const selectedProgress = document.getElementById('selected-progress');
-    // const anyTimeLabel = document.getElementById('any-progress');
-
-
-    // function updateProgressDisplay() {
-    //     commitProgress = Number(progressSlider.value);  // Get slider value
-    //     commitMaxTime = timeScale.invert(commitProgress);
-
-    //     if (commitProgress === -1) {
-    //       selectedProgress.textContent = '';  // Clear time display
-    //       anyTimeLabel.textContent = timeScale[0];  // Clear time display
-    //       anyTimeLabel.style.display = 'block';  // Show "(any time)"
-    //     } else {
-    //       selectedProgress.textContent = new Date(commitMaxTime).toLocaleString(undefined, { 
-    //         dateStyle: "long", 
-    //         timeStyle: "short" 
-    //         });
-    //       anyTimeLabel.style.display = 'none';  // Hide "(any time)"
-    //     }
-
-    //     // Trigger filtering logic which will be implemented in the next step
-    //     filteredCommits = commits.filter(d => new Date(d.datetime) < commitMaxTime);
-    //     // console.log(filteredCommits);
-
-    //     // --------------- other
-    //     let lines = filteredCommits.flatMap((d) => d.lines);
-    //     let files = [];
-    //     files = d3
-    //       .groups(lines, (d) => d.file)
-    //       .map(([name, lines]) => {
-    //         return { name, lines };
-    //       });
-    //     files = d3.sort(files, (d) => -d.lines.length);
-    //     // console.log(lines);
+    const progressSlider = document.getElementById('progress-slider');
+    const selectedProgress = document.getElementById('selected-progress');
+    const anyTimeLabel = document.getElementById('any-progress');
 
 
-    //     d3.select('.files').selectAll('div').remove(); // don't forget to clear everything first so we can re-render
-    //     let filesContainer = d3.select('.files').selectAll('div').data(files).enter().append('div');
+    function updateProgressDisplay() {
+        commitProgress = Number(progressSlider.value);  // Get slider value
+        commitMaxTime = timeScale.invert(commitProgress);
+
+        if (commitProgress === -1) {
+          selectedProgress.textContent = '';  // Clear time display
+          anyTimeLabel.textContent = timeScale[0];  // Clear time display
+          anyTimeLabel.style.display = 'block';  // Show "(any time)"
+        } else {
+          selectedProgress.textContent = new Date(commitMaxTime).toLocaleString(undefined, { 
+            dateStyle: "long", 
+            timeStyle: "short" 
+            });
+          anyTimeLabel.style.display = 'none';  // Hide "(any time)"
+        }
+
+        // Trigger filtering logic which will be implemented in the next step
+        filteredCommits = commits.filter(d => new Date(d.datetime) < commitMaxTime);
+        // console.log(filteredCommits);
+
+        // --------------- other
+        let lines = filteredCommits.flatMap((d) => d.lines);
+        let files = [];
+        files = d3
+          .groups(lines, (d) => d.file)
+          .map(([name, lines]) => {
+            return { name, lines };
+          });
+        files = d3.sort(files, (d) => -d.lines.length);
+        // console.log(lines);
+
+
+        d3.select('.files').selectAll('div').remove(); // don't forget to clear everything first so we can re-render
+        let filesContainer = d3.select('.files').selectAll('div').data(files).enter().append('div');
         
 
-    //     filesContainer.append('dt')
-    //     .attr('id','files') // Add unique ID to <dt> based on index
-    //     .append('code')
-    //     .text(d => d.name)
-    //     .append('small')
-    //     .html(d => `${d.lines.length} lines`)
-    //     .style('display', 'block')
-    //     .style('font-size', 'smaller')
-    //     .style('opacity', 0.6);
+        filesContainer.append('dt')
+        .attr('id','files') // Add unique ID to <dt> based on index
+        .append('code')
+        .text(d => d.name)
+        .append('small')
+        .html(d => `${d.lines.length} lines`)
+        .style('display', 'block')
+        .style('font-size', 'smaller')
+        .style('opacity', 0.6);
       
-    //     let fileTypeColors = d3.scaleOrdinal(d3.schemeTableau10);
+        let fileTypeColors = d3.scaleOrdinal(d3.schemeTableau10);
 
-    //     filesContainer.append('dd')
-    //       .attr('id', 'files') // Add unique ID to <dd> based on index
-    //       .selectAll('div')
-    //       .data(d => d.lines)  // Use 'lines' as the data source for each <div>
-    //       .enter()
-    //       .append('div')  // Append a <div> for each line
-    //       .attr('class', 'line')  // Set the class for styling
-    //       .style('background',d => fileTypeColors(d.type));
+        filesContainer.append('dd')
+          .attr('id', 'files') // Add unique ID to <dd> based on index
+          .selectAll('div')
+          .data(d => d.lines)  // Use 'lines' as the data source for each <div>
+          .enter()
+          .append('div')  // Append a <div> for each line
+          .attr('class', 'line')  // Set the class for styling
+          .style('background',d => fileTypeColors(d.type));
 
 
 
-    //     // sort files by number of lines
+        // sort files by number of lines
 
                 
   
-    //     // updateCircles(filterTripsByTime());
-    //     updateScatterplot(filteredCommits);
-    // }
+        // updateCircles(filterTripsByTime());
+        updateScatterplot(filteredCommits);
+    }
     updateScatterplot(filteredCommits);
 
-    // progressSlider.addEventListener('input', updateProgressDisplay);
+    progressSlider.addEventListener('input', updateProgressDisplay);
 
     // scrolly stuff
     let ITEM_HEIGHT = 120; // Feel free to change
@@ -165,24 +165,7 @@ async function loadData() {
         commitSelection.exit().remove();
     }
 
-    function displayCommitFiles() {
-      const lines = filteredCommits.flatMap((d) => d.lines);
-      let fileTypeColors = d3.scaleOrdinal(d3.schemeTableau10);
-      let files = d3.groups(lines, (d) => d.file).map(([name, lines]) => {
-        return { name, lines };
-      });
-      files = d3.sort(files, (d) => -d.lines.length);
-      d3.select('.files').selectAll('div').remove();
-      let filesContainer = d3.select('.files').selectAll('div').data(files).enter().append('div');
-      filesContainer.append('dt').html(d => `<code>${d.name}</code><small>${d.lines.length} lines</small>`);
-      filesContainer.append('dd')
-                    .selectAll('div')
-                    .data(d => d.lines)
-                    .enter()
-                    .append('div')
-                    .attr('class', 'line')
-                    .style('background', d => fileTypeColors(d.type));
-    }
+    
     
   
   }

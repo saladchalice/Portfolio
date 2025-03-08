@@ -11,9 +11,8 @@
 
     <title>Portfolio</title>
 </head>
-<body>
-
-    <h1>
+<body class="meta-page">
+    <!-- <h1>
       <header class="right-header">
         <label>
             Show commits until:
@@ -22,7 +21,7 @@
             <time id="selected-progress"></time>
         </label>
       </header>
-    </h1>
+    </h1> -->
     <dl class="files"></dl>
     <div id="stats"></div>
 
@@ -40,7 +39,15 @@
         <!-- Add: Time, author, lines edited -->
       </dl> 
 
-    <div id="chart"></div>
+      <div id="scrollytelling">
+        <div id="scroll-container">
+            <div id="spacer"></div>
+            <div id="items-container"></div>
+        </div>
+        <!-- our old scatterplot div -->
+        <div id="chart"></div>
+    </div>
+
     <p id="selection-count">No commits selected</p>
     <dl id="language-breakdown" class="stats"></dl>
 

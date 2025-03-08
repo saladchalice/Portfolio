@@ -22,81 +22,169 @@ async function loadData() {
     //slider functionality ---------------------------------------------------------
     // select elements
 
-    let commitProgress = 100;
-    let timeScale = d3.scaleTime([d3.min(commits, d => d.datetime), d3.max(commits, d => d.datetime)], [0, 100]);
-    let commitMaxTime = timeScale.invert(commitProgress);
+    // let commitProgress = 100;
+    // let timeScale = d3.scaleTime([d3.min(commits, d => d.datetime), d3.max(commits, d => d.datetime)], [0, 100]);
+    // let commitMaxTime = timeScale.invert(commitProgress);
 
-    const progressSlider = document.getElementById('progress-slider');
-    const selectedProgress = document.getElementById('selected-progress');
-    const anyTimeLabel = document.getElementById('any-progress');
-
-
-    function updateProgressDisplay() {
-        commitProgress = Number(progressSlider.value);  // Get slider value
-        commitMaxTime = timeScale.invert(commitProgress);
-
-        if (commitProgress === -1) {
-          selectedProgress.textContent = '';  // Clear time display
-          anyTimeLabel.textContent = timeScale[0];  // Clear time display
-          anyTimeLabel.style.display = 'block';  // Show "(any time)"
-        } else {
-          selectedProgress.textContent = new Date(commitMaxTime).toLocaleString(undefined, { 
-            dateStyle: "long", 
-            timeStyle: "short" 
-            });
-          anyTimeLabel.style.display = 'none';  // Hide "(any time)"
-        }
-
-        // Trigger filtering logic which will be implemented in the next step
-        filteredCommits = commits.filter(d => new Date(d.datetime) < commitMaxTime);
-        // console.log(filteredCommits);
-
-        // --------------- other
-        let lines = filteredCommits.flatMap((d) => d.lines);
-        let files = [];
-        files = d3
-          .groups(lines, (d) => d.file)
-          .map(([name, lines]) => {
-            return { name, lines };
-          });
-        files = d3.sort(files, (d) => -d.lines.length);
-        // console.log(lines);
+    // const progressSlider = document.getElementById('progress-slider');
+    // const selectedProgress = document.getElementById('selected-progress');
+    // const anyTimeLabel = document.getElementById('any-progress');
 
 
-        d3.select('.files').selectAll('div').remove(); // don't forget to clear everything first so we can re-render
-        let filesContainer = d3.select('.files').selectAll('div').data(files).enter().append('div');
+    // function updateProgressDisplay() {
+    //     commitProgress = Number(progressSlider.value);  // Get slider value
+    //     commitMaxTime = timeScale.invert(commitProgress);
+
+    //     if (commitProgress === -1) {
+    //       selectedProgress.textContent = '';  // Clear time display
+    //       anyTimeLabel.textContent = timeScale[0];  // Clear time display
+    //       anyTimeLabel.style.display = 'block';  // Show "(any time)"
+    //     } else {
+    //       selectedProgress.textContent = new Date(commitMaxTime).toLocaleString(undefined, { 
+    //         dateStyle: "long", 
+    //         timeStyle: "short" 
+    //         });
+    //       anyTimeLabel.style.display = 'none';  // Hide "(any time)"
+    //     }
+
+    //     // Trigger filtering logic which will be implemented in the next step
+    //     filteredCommits = commits.filter(d => new Date(d.datetime) < commitMaxTime);
+    //     // console.log(filteredCommits);
+
+    //     // --------------- other
+    //     let lines = filteredCommits.flatMap((d) => d.lines);
+    //     let files = [];
+    //     files = d3
+    //       .groups(lines, (d) => d.file)
+    //       .map(([name, lines]) => {
+    //         return { name, lines };
+    //       });
+    //     files = d3.sort(files, (d) => -d.lines.length);
+    //     // console.log(lines);
+
+
+    //     d3.select('.files').selectAll('div').remove(); // don't forget to clear everything first so we can re-render
+    //     let filesContainer = d3.select('.files').selectAll('div').data(files).enter().append('div');
         
 
-        filesContainer.append('dt')
-        .attr('id','files') // Add unique ID to <dt> based on index
-        .append('code')
-        .text(d => d.name)
-        .append('small')
-        .html(d => `${d.lines.length} lines`)
-        .style('display', 'block')
-        .style('font-size', 'smaller')
-        .style('opacity', 0.6);
+    //     filesContainer.append('dt')
+    //     .attr('id','files') // Add unique ID to <dt> based on index
+    //     .append('code')
+    //     .text(d => d.name)
+    //     .append('small')
+    //     .html(d => `${d.lines.length} lines`)
+    //     .style('display', 'block')
+    //     .style('font-size', 'smaller')
+    //     .style('opacity', 0.6);
       
-        filesContainer.append('dd')
-          .attr('id', 'files') // Add unique ID to <dd> based on index
-          .selectAll('div')
-          .data(d => d.lines)  // Use 'lines' as the data source for each <div>
-          .enter()
-          .append('div')  // Append a <div> for each line
-          .attr('class', 'line')  // Set the class for styling
+    //     let fileTypeColors = d3.scaleOrdinal(d3.schemeTableau10);
+
+    //     filesContainer.append('dd')
+    //       .attr('id', 'files') // Add unique ID to <dd> based on index
+    //       .selectAll('div')
+    //       .data(d => d.lines)  // Use 'lines' as the data source for each <div>
+    //       .enter()
+    //       .append('div')  // Append a <div> for each line
+    //       .attr('class', 'line')  // Set the class for styling
+    //       .style('background',d => fileTypeColors(d.type));
 
 
 
-        let fileTypeColors = d3.scaleOrdinal(d3.schemeTableau10);
+    //     // sort files by number of lines
 
                 
   
-        // updateCircles(filterTripsByTime());
-        updateScatterplot(filteredCommits);
-    }
+    //     // updateCircles(filterTripsByTime());
+    //     updateScatterplot(filteredCommits);
+    // }
     updateScatterplot(filteredCommits);
 
-    progressSlider.addEventListener('input', updateProgressDisplay);
+    // progressSlider.addEventListener('input', updateProgressDisplay);
+
+    // scrolly stuff
+    let ITEM_HEIGHT = 120; // Feel free to change
+    let VISIBLE_COUNT = 3; // Feel free to change as well
+    let totalHeight = (commits.length - 1) * ITEM_HEIGHT;
+    
+    const scrollContainer = d3.select('#scroll-container');
+    const spacer = d3.select('#spacer');
+    spacer.style('height', `${totalHeight}px`);
+    const itemsContainer = d3.select('#items-container');
+    
+    let currentStartIndex = 0; // Track the current start index to prevent unnecessary rerenders
+    
+    scrollContainer.on('scroll', () => {
+        const scrollTop = scrollContainer.property('scrollTop');
+        let startIndex = Math.floor(scrollTop / ITEM_HEIGHT);
+        startIndex = Math.max(0, Math.min(startIndex, commits.length - VISIBLE_COUNT));
+    
+        // If the start index has changed, render items from the new start index
+        if (startIndex !== currentStartIndex) {
+            currentStartIndex = startIndex;
+            renderItems(currentStartIndex);
+        }
+    });
+    
+    function renderItems(startIndex) {
+        const endIndex = Math.min(startIndex + VISIBLE_COUNT, commits.length);
+        let newCommitSlice = commits.slice(startIndex, endIndex);
+    
+        console.log(newCommitSlice);
+    
+        // Update scatterplot with the new visible commits
+        updateScatterplot(newCommitSlice);
+    
+        // Select existing commit elements, binding data to them
+        let commitSelection = itemsContainer.selectAll('.commit-item')
+            .data(newCommitSlice, d => d.datetime); // Use datetime as a unique key
+    
+        // **ENTER**: Create new elements only when needed
+        commitSelection.enter()
+            .append('div')
+            .classed('commit-item', true)
+            .merge(commitSelection) // Merge enter and update selections
+            .style('position', 'absolute')
+            .style('top', (commit, idx) => `${(startIndex + idx) * ITEM_HEIGHT}px`) // Position each correctly in scroll space
+            .html((commit, idx) => `
+                <p>
+                    On ${commit.datetime.toLocaleString("en", { dateStyle: "full", timeStyle: "short" })}, I made
+                    <a href="${commit.url}" target="_blank">
+                        ${startIndex + idx > 0 ? 'another glorious commit' : 'my first commit, and it was glorious'}
+                    </a>.
+                    I edited ${commit.totalLines} lines across ${d3.rollups(commit.lines, D => D.length, d => d.file).length} files.
+                    Reviewed what was pushed and it all looked pretty good. 
+                </p>
+                <hr style="border: none; border-top: 1px solid #bbb; margin: 10px 0;">
+            `)
+            .style('width', '100%')
+            .style('padding', '10px')
+            .style('background', '#f8f9fa')
+            .style('border-bottom', '1px solid #ddd');  // Light grey border
+    
+        // **EXIT**: Remove elements no longer in view
+        commitSelection.exit().remove();
+    }
+
+    function displayCommitFiles() {
+      const lines = filteredCommits.flatMap((d) => d.lines);
+      let fileTypeColors = d3.scaleOrdinal(d3.schemeTableau10);
+      let files = d3.groups(lines, (d) => d.file).map(([name, lines]) => {
+        return { name, lines };
+      });
+      files = d3.sort(files, (d) => -d.lines.length);
+      d3.select('.files').selectAll('div').remove();
+      let filesContainer = d3.select('.files').selectAll('div').data(files).enter().append('div');
+      filesContainer.append('dt').html(d => `<code>${d.name}</code><small>${d.lines.length} lines</small>`);
+      filesContainer.append('dd')
+                    .selectAll('div')
+                    .data(d => d.lines)
+                    .enter()
+                    .append('div')
+                    .attr('class', 'line')
+                    .style('background', d => fileTypeColors(d.type));
+    }
+    
+  
   }
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -426,6 +514,7 @@ function updateLanguageBreakdown() {
 
   return breakdown;
 }
+
 
 
 

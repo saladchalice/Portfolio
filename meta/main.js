@@ -95,10 +95,7 @@ async function loadData() {
                 
   
         // updateCircles(filterTripsByTime());
-        updateScatterplot(filteredCommits);
     }
-    updateScatterplot(filteredCommits);
-
     progressSlider.addEventListener('input', updateProgressDisplay);
 
     // scrolly stuff
